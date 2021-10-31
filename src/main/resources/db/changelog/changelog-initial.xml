@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="setup-db" author="Jamie-Aslanian">
+		<createTable tableName="MESSAGES">
+			<column name="PK" autoIncrement="true" type="bigint">
+				<constraints primaryKey="true" unique="true"/>
+			</column>
+            <column name="LAST_UPDATED" type="datetime"/>
+            <column name="TITLE" type="varchar(50)"/>
+            <column name="MESSAGE" type="varchar(300)"/>
+            <column name="USER_FK" type="bigint"/>            
+		</createTable>
+		<createTable tableName="MESSAGE_TAG">
+			<column name="MESSAGE_PK" type="bigint">
+			  <constraints primaryKey="true"/>
+			</column> 
+            <column name="TAG_PK" type="bigint">
+			  <constraints primaryKey="true"/>
+			</column>            
+		</createTable>
+		<createTable tableName="TAGS">
+			<column name="PK" autoIncrement="true" type="bigint">
+				<constraints primaryKey="true" unique="true"/>
+			</column>
+            <column name="LAST_UPDATED" type="datetime"/>
+            <column name="TAG" type="varchar(50)"/>
+		</createTable>
+		<createTable tableName="USER">
+			<column name="PK" autoIncrement="true" type="bigint">
+				<constraints primaryKey="true" unique="true"/>
+			</column>
+            <column name="LAST_UPDATED" type="datetime"/>
+            <column name="USERNAME" type="varchar(50)"/>
+            <column name="PASSWORD" type="varchar(255)"/>
+            <column name="EMAILADDRESS" type="varchar(150)"/>
+            <column name="ADMIN" type="boolean"/>
+		</createTable>
+	</changeSet>
+
+</databaseChangeLog>
