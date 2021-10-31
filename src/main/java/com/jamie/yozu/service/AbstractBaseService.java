@@ -1,6 +1,7 @@
 package com.jamie.yozu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.jamie.yozu.dao.IBasicDao;
@@ -10,6 +11,7 @@ import com.jamie.yozu.domain.IBaseDomain;
 public abstract class AbstractBaseService implements IBaseService {
   
   @Autowired
+  @Qualifier("basicHibernateDao")
   IBasicDao basicDao;
   
   @Override
