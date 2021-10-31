@@ -17,12 +17,10 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.jamie.yozu.exceptions.FailedToStartExeception;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class DatabaseConfiguration implements TransactionManagementConfigurer {
-  
-  @Autowired
-  DataSource dataSource;
   
   @Autowired
   private Environment environment;
@@ -43,9 +41,22 @@ public class DatabaseConfiguration implements TransactionManagementConfigurer {
   }
   
   @Bean
+  public DataSource dataSource() {
+    HikariDataSource dataSource  = new HikariDataSource();
+    dataSource.setJdbcUrl(environment.getProperty("spring.datasource.hikari.jdbc-url"));
+    dataSource.setDriverClassName(environment.getProperty("spring.datasource.hikari.driver-class-name"));
+    dataSource.setUsername(environment.getProperty("spring.datasource.hikari.username"));
+    dataSource.setPassword(environment.getProperty("spring.datasource.hikari.password"));
+    dataSource.setMinimumIdle(Integer.parseInt(environment.getProperty("spring.datasource.hikari.minimum-idle")));
+    dataSource.setMaximumPoolSize(Integer.parseInt(environment.getProperty("spring.datasource.hikari.maximum-pool-size")));
+    dataSource.setLeakDetectionThreshold(0L);
+    return dataSource;
+  }
+  
+  @Bean
   public SessionFactory sessionFactory() throws IOException {
     LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-    localSessionFactoryBean.setDataSource(dataSource);
+    localSessionFactoryBean.setDataSource(dataSource());
     Properties hibernateProps = new Properties();
     hibernateProps.setProperty("hibernate.dialect", environment.getProperty("hibenate.dialect"));
     hibernateProps.setProperty("hibernate.current_session_context_class", 
