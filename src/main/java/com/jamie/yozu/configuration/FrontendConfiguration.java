@@ -53,7 +53,7 @@ public class FrontendConfiguration implements WebMvcConfigurer {
   
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addRedirectViewController("/", "home");
+    registry.addRedirectViewController("/", "/messages");
   }
   
 }
