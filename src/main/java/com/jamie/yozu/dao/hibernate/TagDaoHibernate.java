@@ -6,8 +6,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import org.springframework.stereotype.Repository;
+
 import com.jamie.yozu.domain.hibernate.TagHibernate;
 
+@Repository
 public class TagDaoHibernate extends BasicHibernateDao {
   
   public List<TagHibernate> getAll() {

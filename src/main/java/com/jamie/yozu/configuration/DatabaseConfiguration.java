@@ -34,9 +34,10 @@ public class DatabaseConfiguration implements TransactionManagementConfigurer {
   }
   
   @Bean
-  public TransactionTemplate TransactionTemplate() {
+  public TransactionTemplate transactionTemplate() throws IOException {
     TransactionTemplate template = new TransactionTemplate();
     template.setPropagationBehavior(0);
+    template.setTransactionManager(transactionManager());
     return template;
   }
   

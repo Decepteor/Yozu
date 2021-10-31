@@ -1,5 +1,7 @@
 package com.jamie.yozu.dao.hibernate;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -8,6 +10,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -21,10 +24,12 @@ public class BasicHibernateDao implements IBasicDao {
   SessionFactory sessionFactory;
   
   @Autowired
+  @Qualifier("transactionTemplate")
   protected TransactionTemplate template;
 
   @Override
   public void saveOrUpdate(IBaseDomain object) {
+    object.setLastUpdated(LocalDateTime.now());
     template.executeWithoutResult(trans -> getSession().saveOrUpdate(object));
   }
 
