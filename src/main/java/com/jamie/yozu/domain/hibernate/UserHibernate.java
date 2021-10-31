@@ -1,55 +1,62 @@
 package com.jamie.yozu.domain.hibernate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import com.jamie.yozu.domain.IUser;
 
+@Entity
+@Table(name = "USER")
 public class UserHibernate extends BaseDomainHibernate implements IUser {
+  
+  String username;
+  String password;
+  String emailAdress;
+  boolean admin;
 
   @Override
+  @Column(name = "USERNAME")
   public String getUsername() {
-    // TODO Auto-generated method stub
-    return null;
+    return username;
   }
 
   @Override
+  @Column(name = "PASSWORD")
   public String getPassword() {
-    // TODO Auto-generated method stub
-    return null;
+    return password;
   }
 
   @Override
+  @Column(name = "EMAIL_ADDRESS")
   public String getEmailAddress() {
-    // TODO Auto-generated method stub
-    return null;
+    return emailAdress;
   }
 
   @Override
+  @Column(name = "ADMIN")
   public boolean isAdmin() {
-    // TODO Auto-generated method stub
-    return false;
+    return admin;
   }
 
   @Override
   public void setUsername(String name) {
-    // TODO Auto-generated method stub
-
+    this.username = name;
   }
 
   @Override
   public void setPassword(String password) {
-    // TODO Auto-generated method stub
-
+    this.password = password;
   }
 
   @Override
   public void setEmailAddress(String address) {
-    // TODO Auto-generated method stub
-
+    this.emailAdress = address;
   }
 
   @Override
   public void setAdmin(boolean admin) {
-    // TODO Auto-generated method stub
-
+    this.admin = admin;
   }
 
 }

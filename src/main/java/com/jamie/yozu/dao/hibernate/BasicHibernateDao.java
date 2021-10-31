@@ -21,7 +21,7 @@ public class BasicHibernateDao implements IBasicDao {
   SessionFactory sessionFactory;
   
   @Autowired
-  TransactionTemplate template;
+  protected TransactionTemplate template;
 
   @Override
   public void saveOrUpdate(IBaseDomain object) {

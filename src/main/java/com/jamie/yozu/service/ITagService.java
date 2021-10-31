@@ -8,6 +8,8 @@ public interface ITagService {
 
   List<? extends ITag> getTagsByStrings(List<String> strings);
   
+  List<? extends ITag> getAllTags();
+  
   ITag getTagByString(String tag);
   
   ITag createTagFromString(String tag);

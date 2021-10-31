@@ -9,6 +9,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.Hibernate;
+
 import com.jamie.yozu.domain.IMessage;
 import com.jamie.yozu.domain.ITag;
 import com.jamie.yozu.domain.IUser;
@@ -68,6 +70,12 @@ public class MessageHibernate extends BaseDomainHibernate implements IMessage {
   @Override
   public void setUser(IUser user) {
     this.user = (UserHibernate) user;
+  }
+  
+  public void init() {
+    Hibernate.initialize(getMessage());
+    Hibernate.initialize(getUser());
+    Hibernate.initialize(getTags());
   }
 
 }
