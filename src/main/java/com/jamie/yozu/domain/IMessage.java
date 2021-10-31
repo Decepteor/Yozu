@@ -6,12 +6,12 @@ public interface IMessage extends IBaseDomain {
 
   String getMessage();
   String getTitle();
-  List<ITag> getTags();
+  List<? extends ITag> getTags();
   IUser getUser();
   
   void setMessage(String message);
   void setTitle(String title);
-  void setTags(List<ITag> tags);
+  void setTags(List<? extends ITag> tags);
   void setUser(IUser user);
   
 }

@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public interface IBaseDomain {
   
-  Integer getPk();
-  void setPk(Integer pk);
+  Long getPk();
+  void setPk(Long pk);
   LocalDateTime getLastUpdated();
   void setLastUpdated(LocalDateTime lastUpdated);
 }
