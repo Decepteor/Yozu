@@ -1,5 +1,7 @@
 package com.jamie.yozu.security;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,8 +28,9 @@ public class AuthenticationProvider implements org.springframework.security.auth
     
     IUser user = userService.getUserByUsername(authentication.getName());
     
-    if (user != null && passwordService.matches(authentication.getCredentials().toString(), user.getPassword())) {
-      return new UsernamePasswordAuthenticationToken(user.getUsername(), authentication.getCredentials().toString());
+    String password = authentication.getCredentials() != null? authentication.getCredentials().toString() : "";
+    if (user != null && passwordService.matches(password, user.getPassword())) {
+      return new UsernamePasswordAuthenticationToken(user.getUsername(), password, new ArrayList<>());
     }
     else {
       throw new BadCredentialsException("password missmatch");

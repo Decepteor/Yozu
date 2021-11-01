@@ -55,7 +55,7 @@ public class FrontendConfiguration implements WebMvcConfigurer {
   @Bean
   public FreeMarkerViewResolver viewResolver() {
     FreeMarkerViewResolver viewRes = new FreeMarkerViewResolver();
-    viewRes.setCache(false);
+    viewRes.setCache(true);
     viewRes.setPrefix("");
     viewRes.setSuffix(".ftl");
     return viewRes;

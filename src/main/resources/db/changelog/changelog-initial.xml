@@ -42,5 +42,24 @@
             <column name="ADMIN" type="boolean"/>
 		</createTable>
 	</changeSet>
+	
+	<changeSet id="insert-user-data" author="Jamie-Aslanian">
+		<insert tableName="USER">
+            <column name="LAST_UPDATED" value="2021-11-01 19:26:00"/>
+            <column name="USERNAME" value="User"/>
+            <column name="PASSWORD" value="$2a$10$3djhuFY74rU9h51/1OmfOOZuNk.E/eP15ydz62nYqd3jxKL4qSWx2"/>
+            <column name="EMAILADDRESS"  value="fake2@email.com"/>
+            <column name="ADMIN" valueBoolean="false"/>
+		</insert>
+		
+		<insert tableName="USER">
+            <column name="LAST_UPDATED" value="2021-11-01 19:26:00"/>
+            <column name="USERNAME" value="Admin"/>
+            <column name="PASSWORD" value="$2a$10$3djhuFY74rU9h51/1OmfOOZuNk.E/eP15ydz62nYqd3jxKL4qSWx2"/>
+            <column name="EMAILADDRESS" value="fake@email.com"/>
+            <column name="ADMIN" valueBoolean="true"/>
+		</insert>
+	</changeSet>
+	
 
 </databaseChangeLog>

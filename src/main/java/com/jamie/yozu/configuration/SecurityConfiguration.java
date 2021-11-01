@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import com.jamie.yozu.security.RoleVoter;
 
@@ -41,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/login", "/logout", "/static/images/**", "/logo/**").permitAll()
     
     .anyRequest().authenticated().accessDecisionManager(accessDecisionManage())
-    .and().formLogin().loginPage("/login").defaultSuccessUrl("/messages")
+    .and().formLogin().loginPage("/login").successHandler(new SavedRequestAwareAuthenticationSuccessHandler()).defaultSuccessUrl("/messages")
     .and().logout().logoutUrl("/logout").invalidateHttpSession(true);
   }
   

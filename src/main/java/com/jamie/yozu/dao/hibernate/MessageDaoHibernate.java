@@ -20,7 +20,8 @@ public class MessageDaoHibernate extends BasicHibernateDao {
     return template.execute(action ->  {
       CriteriaBuilder cb = getSession().getCriteriaBuilder();
       CriteriaQuery<MessageHibernate> q = cb.createQuery(MessageHibernate.class);
-      return getSession().createQuery(q).setMaxResults(20).getResultList();
+      Root<MessageHibernate> root = q.from(MessageHibernate.class);
+      return getSession().createQuery(q.select(root)).setMaxResults(20).getResultList();
       });
   }
 

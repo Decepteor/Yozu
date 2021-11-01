@@ -7,6 +7,8 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -20,6 +22,7 @@ import com.jamie.yozu.exceptions.FailedToStartExeception;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
+@EnableAutoConfiguration(exclude = HibernateJpaAutoConfiguration.class)
 public class DatabaseConfiguration implements TransactionManagementConfigurer {
   
   @Autowired
