@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/error")
-public class ErrorController {
+public class ErrorController implements org.springframework.boot.web.servlet.error.ErrorController {
   
   @GetMapping
   public ModelAndView getPage() {
