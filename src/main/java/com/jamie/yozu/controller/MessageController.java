@@ -95,6 +95,8 @@ public class MessageController {
     else {
       view.addObject("messages", messageService.getAllMessages());
     }
+    view.addObject("filtered", postTags);
+    view.addObject("mostRecent", tagService.getMostRecentTags());
   }
   
 }

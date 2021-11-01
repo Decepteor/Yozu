@@ -31,13 +31,12 @@ public class MessageDaoHibernate extends BasicHibernateDao {
   }
 
   public List<MessageHibernate> getAllMessagesContainingTags(List<TagHibernate> tags) {
-    return template.execute(action ->  {
-      CriteriaBuilder cb = getSession().getCriteriaBuilder();
-      CriteriaQuery<MessageHibernate> q = cb.createQuery(MessageHibernate.class);
-      Root<MessageHibernate> root = q.from(MessageHibernate.class);
-      q.where(root.get("tags").in(tags));
-      List<MessageHibernate> list = getSession().createQuery(q.orderBy(cb.desc(root.get("lastUpdated"))))
-          .setMaxResults(20).getResultList();
+    return  (List<MessageHibernate>) template.execute(action ->  {
+      
+      @SuppressWarnings("unchecked")
+      List<MessageHibernate> list = (List<MessageHibernate>) getSession()
+          .createQuery("from MessageHibernate as mess inner join fetch mess.tags as tags where tags in :tags order by mess.lastUpdated desc")
+          .setParameter("tags", tags).setMaxResults(20).getResultList();
       for (MessageHibernate message : list) {
         message.init();
       }

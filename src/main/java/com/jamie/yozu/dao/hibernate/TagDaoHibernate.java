@@ -17,7 +17,16 @@ public class TagDaoHibernate extends BasicHibernateDao {
     return template.execute(action ->  {
       CriteriaBuilder cb = getSession().getCriteriaBuilder();
       CriteriaQuery<TagHibernate> q = cb.createQuery(TagHibernate.class);
-      return getSession().createQuery(q).setMaxResults(20).getResultList();
+      return getSession().createQuery(q).getResultList();
+      });
+  }
+  
+  public List<TagHibernate> getMostRecent20() {
+    return template.execute(action ->  {
+      CriteriaBuilder cb = getSession().getCriteriaBuilder();
+      CriteriaQuery<TagHibernate> q = cb.createQuery(TagHibernate.class);
+      Root<TagHibernate> root = q.from(TagHibernate.class);
+      return getSession().createQuery(q.orderBy(cb.desc(root.get("lastUpdated")))).setMaxResults(20).getResultList();
       });
   }
   

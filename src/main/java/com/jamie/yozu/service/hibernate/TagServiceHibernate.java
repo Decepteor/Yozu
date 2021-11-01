@@ -44,4 +44,9 @@ public class TagServiceHibernate extends AbstractBaseService implements ITagServ
     return tagOb;
   }
 
+  @Override
+  public List<? extends ITag> getMostRecentTags() {
+    return tagDao.getMostRecent20();
+  }
+
 }

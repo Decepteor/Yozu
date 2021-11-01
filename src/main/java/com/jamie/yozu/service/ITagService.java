@@ -10,6 +10,8 @@ public interface ITagService extends IBaseService {
   
   List<? extends ITag> getAllTags();
   
+  List<? extends ITag> getMostRecentTags();
+  
   ITag getTagByString(String tag);
   
   ITag createTagFromString(String tag);
