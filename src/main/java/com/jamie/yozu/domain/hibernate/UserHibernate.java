@@ -28,7 +28,7 @@ public class UserHibernate extends BaseDomainHibernate implements IUser {
   }
 
   @Override
-  @Column(name = "EMAIL_ADDRESS")
+  @Column(name = "EMAILADDRESS")
   public String getEmailAddress() {
     return emailAdress;
   }

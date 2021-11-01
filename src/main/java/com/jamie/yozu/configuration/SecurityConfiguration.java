@@ -39,7 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.authorizeRequests().antMatchers("/login", "/logout", "/static/images/**", "/logo/**").permitAll()
-    .anyRequest().authenticated().accessDecisionManager(accessDecisionManage());
+    
+    .anyRequest().authenticated().accessDecisionManager(accessDecisionManage())
+    .and().formLogin().loginPage("/login").defaultSuccessUrl("/messages")
+    .and().logout().logoutUrl("/logout").invalidateHttpSession(true);
   }
   
   @Bean

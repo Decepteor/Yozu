@@ -30,7 +30,7 @@ public class TagServiceHibernate extends AbstractBaseService implements ITagServ
 
   @Override
   public ITag getTagByString(String tag) {
-    return null;
+    return tagDao.getTagFromString(tag);
   }
 
   @Override

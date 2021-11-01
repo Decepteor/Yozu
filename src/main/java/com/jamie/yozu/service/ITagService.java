@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.jamie.yozu.domain.ITag;
 
-public interface ITagService {
+public interface ITagService extends IBaseService {
 
   List<? extends ITag> getTagsByStrings(List<String> strings);
   

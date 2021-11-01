@@ -26,7 +26,7 @@ public class AuthenticationProvider implements org.springframework.security.auth
     
     IUser user = userService.getUserByUsername(authentication.getName());
     
-    if (passwordService.matches(authentication.getCredentials().toString(), user.getPassword())) {
+    if (user != null && passwordService.matches(authentication.getCredentials().toString(), user.getPassword())) {
       return new UsernamePasswordAuthenticationToken(user.getUsername(), authentication.getCredentials().toString());
     }
     else {

@@ -30,5 +30,15 @@ public class TagDaoHibernate extends BasicHibernateDao {
       return getSession().createQuery(q).setMaxResults(20).getResultList();
       });
   }
+  
+  public TagHibernate getTagFromString(String str) {
+    return template.execute(action ->  {
+      CriteriaBuilder cb = getSession().getCriteriaBuilder();
+      CriteriaQuery<TagHibernate> q = cb.createQuery(TagHibernate.class);
+      Root<TagHibernate> root = q.from(TagHibernate.class);
+      q.where(cb.equal(root.get("tag"), str));
+      return getSession().createQuery(q).uniqueResult();
+      });
+  }
 
 }

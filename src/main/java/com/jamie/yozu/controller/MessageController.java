@@ -56,7 +56,7 @@ public class MessageController {
     for (String str : message.getTags().split("#")) {
       if (!str.isBlank()) {
         ITag tagByString = tagService.getTagByString(str);
-        tags.add(tagByString != null ? tagByString : tagService.createTagFromString(str) );
+        tags.add(tagByString != null ? tagByString : createAndSave(str));
       }
     }
     
@@ -74,6 +74,14 @@ public class MessageController {
     addObjects(postTags, view);
     
     return view;
+  }
+
+
+
+  private ITag createAndSave(String str) {
+    ITag tag = tagService.createTagFromString(str);
+    tagService.saveOrUpdate(tag);
+    return tag;
   }
 
   private void addObjects(List<String> postTags, ModelAndView view) {

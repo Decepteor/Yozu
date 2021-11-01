@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import freemarker.cache.ConditionalTemplateConfigurationFactory;
 import freemarker.cache.FileExtensionMatcher;
@@ -49,6 +50,15 @@ public class FrontendConfiguration implements WebMvcConfigurer {
                                                                                            templateConfiguration);
     freemarkerConfig.getConfiguration().setTemplateConfigurations(factory);
     return freemarkerConfig;
+  }
+  
+  @Bean
+  public FreeMarkerViewResolver viewResolver() {
+    FreeMarkerViewResolver viewRes = new FreeMarkerViewResolver();
+    viewRes.setCache(false);
+    viewRes.setPrefix("");
+    viewRes.setSuffix(".ftl");
+    return viewRes;
   }
   
   @Override
