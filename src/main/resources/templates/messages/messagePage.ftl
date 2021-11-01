@@ -77,7 +77,7 @@
 <div class="message-section">
 <div style="text-align: center;">
 Hello, Welcome to Today I Have! <br>
-<div>
+</div>
 <#if message??>
 	<div id="response-message" <#if messageType = "Failed"> class="sad-post" <#elseif messageType = "Success"> class="happy-post" </#if>>
 		${message}
