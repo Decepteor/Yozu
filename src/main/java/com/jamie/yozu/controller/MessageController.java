@@ -48,19 +48,19 @@ public class MessageController {
 
 
   @PostMapping
-  public ModelAndView getPage(@RequestParam PageMessage message, @RequestParam(required = false) List<String> postTags) {
+  public ModelAndView getPage(PageMessage postMessage, @RequestParam(required = false) List<String> postTags) {
     
     ModelAndView view = new ModelAndView("messages/messagePage");
     
     List<ITag> tags = new ArrayList<>();
-    for (String str : message.getTags().split("#")) {
+    for (String str : postMessage.getTags().split("#")) {
       if (!str.isBlank()) {
         ITag tagByString = tagService.getTagByString(str);
         tags.add(tagByString != null ? tagByString : createAndSave(str));
       }
     }
     
-    IMessage actualMessage = messageService.createMessage(message.getTitle(), message.getMessage(), tags,
+    IMessage actualMessage = messageService.createMessage(postMessage.getTitle(), postMessage.getMessage(), tags,
         userService.getUserByUsername(userIdentificationService.getLoggedInUsername()));
     
     if (messageService.postMessage(actualMessage)) {

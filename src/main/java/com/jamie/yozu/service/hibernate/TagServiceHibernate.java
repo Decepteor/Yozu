@@ -36,6 +36,9 @@ public class TagServiceHibernate extends AbstractBaseService implements ITagServ
   @Override
   public ITag createTagFromString(String tag) {
     TagHibernate tagOb = new TagHibernate();
+    if (tag.length() > 50) {
+      tag = tag.substring(0, 50);
+    }
     tagOb.setTag(tag);
     tagOb.setLastUpdated(LocalDateTime.now());
     return tagOb;

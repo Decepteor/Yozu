@@ -21,7 +21,12 @@ public class MessageDaoHibernate extends BasicHibernateDao {
       CriteriaBuilder cb = getSession().getCriteriaBuilder();
       CriteriaQuery<MessageHibernate> q = cb.createQuery(MessageHibernate.class);
       Root<MessageHibernate> root = q.from(MessageHibernate.class);
-      return getSession().createQuery(q.select(root)).setMaxResults(20).getResultList();
+      List<MessageHibernate> list = getSession().createQuery(q.select(root).orderBy(cb.desc(root.get("lastUpdated"))))
+          .setMaxResults(20).getResultList();
+      for (MessageHibernate message : list) {
+        message.init();
+      }
+      return list;
       });
   }
 
@@ -31,7 +36,8 @@ public class MessageDaoHibernate extends BasicHibernateDao {
       CriteriaQuery<MessageHibernate> q = cb.createQuery(MessageHibernate.class);
       Root<MessageHibernate> root = q.from(MessageHibernate.class);
       q.where(root.get("tags").in(tags));
-      List<MessageHibernate> list = getSession().createQuery(q).setMaxResults(20).getResultList();
+      List<MessageHibernate> list = getSession().createQuery(q.orderBy(cb.desc(root.get("lastUpdated"))))
+          .setMaxResults(20).getResultList();
       for (MessageHibernate message : list) {
         message.init();
       }

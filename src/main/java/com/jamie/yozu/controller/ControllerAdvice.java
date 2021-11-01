@@ -11,7 +11,7 @@ public class ControllerAdvice {
   @Autowired
   IUserIdentificationService userIdenficticationService;
   
-  @ModelAttribute()
+  @ModelAttribute("user")
   public String getUsername() {
     return userIdenficticationService.getLoggedInUsername();
   }
