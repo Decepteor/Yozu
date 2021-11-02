@@ -39,6 +39,8 @@ public class MessageServiceHibernate extends AbstractBaseService implements IMes
                                                     (UserHibernate)message.getUser())) {
       return false;
     }
+    
+    message.getTags().forEach(tag -> {if(tag.getPk() == null) {saveOrUpdate(tag);}});
     messageDaoHibernate.saveOrUpdate(message);
     return true;
   }

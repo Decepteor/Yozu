@@ -87,7 +87,6 @@ public class MessageController {
 
   private ITag createAndSave(String str) {
     ITag tag = tagService.createTagFromString(str);
-    tagService.saveOrUpdate(tag);
     return tag;
   }
 
