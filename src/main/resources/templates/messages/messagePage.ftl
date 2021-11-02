@@ -42,6 +42,8 @@
     padding: 3px;
     border-radius: 2px;
 	border: 1px solid #9c446c;
+	word-wrap: break-word;
+	overflow-y: scroll;
 }
 
 .side-floater {
