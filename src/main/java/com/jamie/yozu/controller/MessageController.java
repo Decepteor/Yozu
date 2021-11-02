@@ -60,6 +60,13 @@ public class MessageController {
       }
     }
     
+    if (tags.isEmpty()) {
+      view.addObject("message", "Messages must contain tags.");
+      view.addObject("messageType", "Failed");
+      addObjects(postTags, view);
+      return view;
+    }
+    
     IMessage actualMessage = messageService.createMessage(postMessage.getTitle(), postMessage.getMessage(), tags,
         userService.getUserByUsername(userIdentificationService.getLoggedInUsername()));
     
